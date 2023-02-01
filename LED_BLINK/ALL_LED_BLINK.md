@@ -14,7 +14,7 @@ made by Wooseok Diaa Hwang
 
 - F_CPU: 2000000UL
 
-사용 핀
+**사용 핀**
   - PH7
   - PH6
   - PH5
