@@ -1,6 +1,6 @@
-# BinaryPrinter
+# ALL_LED_BLINK
 
-made by Wooseok Diaa Hwang
+made by kimminse
 
 ## 소개
 
