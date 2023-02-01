@@ -1,4 +1,4 @@
-# Sequence_LED
+# Sequence_bit_LED
 
 made by kimminse
 

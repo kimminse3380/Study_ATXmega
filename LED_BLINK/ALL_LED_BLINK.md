@@ -46,3 +46,5 @@ int main(void)
     }
 }
 ```
+## 결과
+https://user-images.githubusercontent.com/85288381/216195442-5a35bffb-d909-456b-b1d5-6baa9ce89848.mp4
