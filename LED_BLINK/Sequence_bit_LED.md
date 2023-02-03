@@ -41,7 +41,7 @@ int main(void)
 	    _delay_ms(500);
 	    
 	    if(buff == 0xFF) // 모든 LED가 꺼지면 if를 통과
-	    {
+	    {ㅋ
 		    buff = 0x00; // 모든 LED를 킴
 	    }
 	    else
@@ -51,5 +51,7 @@ int main(void)
     }
 }
 ```
+
+
 ## 결과
 https://user-images.githubusercontent.com/85288381/216196355-cef66630-a501-4c2c-b235-d03450e42f5e.mp4
