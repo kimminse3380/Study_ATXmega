@@ -55,3 +55,4 @@ int main(void)
 }
 ```
 ## 결과
+https://user-images.githubusercontent.com/85288381/216552345-28c847dd-4657-44ab-9183-449cece5e1db.mp4
