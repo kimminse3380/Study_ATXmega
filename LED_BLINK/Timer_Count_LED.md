@@ -41,6 +41,14 @@ void port_init(void)
 	TCC0.CNTL = 0xFF;
 }
 
+void timer_LED(){
+	if (TCC0.CNT < 15000)
+	{
+		PORTH_OUT = 0xF0;
+	}
+	else
+	PORTH_OUT = 0x00;
+}
 
 int main(void)
 {
@@ -51,12 +59,7 @@ int main(void)
 	
 	while (1)
 	{
-		if (TCC0.CNT < 15000)
-		{
-			PORTH_OUT = 0xF0;
-		}
-		else
-		PORTH_OUT = 0x00;
+		timer_LED();
 	}
 }
 ```
