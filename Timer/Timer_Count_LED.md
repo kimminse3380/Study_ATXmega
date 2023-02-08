@@ -27,7 +27,7 @@ Timer를 통한 LED 점등
 
 void timer_setup(void)
 {
-	TCC0.PER = 20000;
+	TCC0.PER = 62500;
 	TCC0.CTRLA = ( TCC0.CTRLA & TC0_CLKSEL_gm ) | TC_CLKSEL_DIV64_gc;
 	
 	//OVERFLWOK  방지 인터럽트
