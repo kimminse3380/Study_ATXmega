@@ -75,14 +75,6 @@ void port_init(void)
 	TCC0.CNTL = 0xFF;
 }
 
-void timer_LED(){
-	if (TCC0.CNT < 15000)
-	{
-		PORTH_OUT = 0xF0;
-	}
-	else
-	PORTH_OUT = 0x00;
-}
 
 ISR(TCC0_OVF_vect){
 	PORTH_OUTTGL = 0xF0;
