@@ -12,10 +12,11 @@ Timer를 통한 LED 점등
 - 2 MHz int. Osc.
 
 **사용 핀**
-  - PH7
-  - PH6
-  - PH5
-  - PH4
+- PH7
+- PH6
+- PH5
+- PH4
+- TCC0
 
 **사용 레지스터**
 - 데이터 출력값 레지스터 OUT

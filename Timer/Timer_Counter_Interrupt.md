@@ -10,10 +10,13 @@ Timer에서 overflow 인터럽트 발생시 키고 끄기
 **회사 자체 설계 보드**
 
 **사용 핀**
-  - PH7
-  - PH6
-  - PH5
-  - PH4
+- PR1/XTAL1
+- PR0/XTAL2 
+- PH7
+- PH6
+- PH5
+- PH4
+- TCC0
 
 **사용 레지스터**
 - 데이터 출력값 레지스터 OUT
