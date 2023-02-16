@@ -1,4 +1,4 @@
-# ALL_LED_BLINK
+# Timer_Count_LED
 
 made by kimminse
 
@@ -16,6 +16,13 @@ Timer를 통한 LED 점등
   - PH6
   - PH5
   - PH4
+
+**사용 레지스터**
+- 데이터 출력값 레지스터 OUT
+- 데이터 출력값 레지스터 DIR
+- 제어 레지스터 CTRLA
+- 제어 레지스터 CTRLB
+- 인터럽트 제어 레지스터 INTCTRLA
 
 ## 코드
 

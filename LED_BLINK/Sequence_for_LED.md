@@ -1,4 +1,4 @@
-# Sequence_bit_LED
+# Sequence_for_LED
 
 made by kimminse
 
@@ -15,6 +15,10 @@ for문을 활용한 순서대로 LED 키기
   - PH6
   - PH5
   - PH4
+
+**사용 레지스터**
+- 데이터 출력값 레지스터 OUT
+- 데이터 출력값 레지스터 DIR
 
 ## 코드
 

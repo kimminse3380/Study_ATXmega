@@ -1,24 +1,19 @@
-# Crystal_Timer_Count_LED
+# Timer_Counter_Interrupt
 
 made by kimminse
 
 ## 소개
 
-XTAL에 연결되어 있는 크리스탈을 클럭으로 설정하고 Timer를 통한 LED 점등
+Timer에서 overflow 인터럽트 발생시 키고 끄기
 
 ## 보드
 **회사 자체 설계 보드**
-- 16m
-- XTAL
 
 **사용 핀**
-- PR1/XTAL1
-- PR0/XTAL2 
-- PH7
-- PH6
-- PH5
-- PH4
-- TCC0
+  - PH7
+  - PH6
+  - PH5
+  - PH4
 
 **사용 레지스터**
 - 데이터 출력값 레지스터 OUT
@@ -31,6 +26,7 @@ XTAL에 연결되어 있는 크리스탈을 클럭으로 설정하고 Timer를 �
 - 제어 레지스터 CTRLA
 - 제어 레지스터 CTRLB
 - 인터럽트 제어 레지스터 INTCTRLA
+- PMIC 제어 레지스터 CTRL
 
 ## 코드
 
@@ -41,14 +37,14 @@ XTAL에 연결되어 있는 크리스탈을 클럭으로 설정하고 Timer를 �
 void OSC_Clock_init(void){
 	OSC.CTRL &=~OSC_RC2MCREF_bm; //disable RC32M
 	// Setting Ext. OSC
-	OSC.XOSCCTRL = OSC_FRQRANGE_2TO9_gc | OSC_X32KLPM_bm | OSC_XOSCSEL_XTAL_16KCLK_gc;
+	OSC.XOSCCTRL = OSC_FRQRANGE_12TO16_gc | OSC_X32KLPM_bm | OSC_XOSCSEL_XTAL_16KCLK_gc;
 	OSC.CTRL |= OSC_XOSCSEL_gm;
 	do
 	{
 		// 오실레이터가 안정될 때까지 기다리기
 	} while ((OSC.STATUS& OSC_XOSCRDY_bm )==0);
 	
-	OSC.PLLCTRL = (uint8_t)OSC_PLLSRC_XOSC_gc | 0x1; //16M
+	OSC.PLLCTRL = (uint8_t)OSC_PLLSRC_XOSC_gc | 0x2; //32M
 	OSC.CTRL |= OSC_PLLEN_bm; // enable PLL
 	CLK.PSCTRL = (uint8_t)CLK_PSADIV_1_gc |  CLK_PSBCDIV_1_1_gc; ////프리스케일러
 	
@@ -60,43 +56,46 @@ void OSC_Clock_init(void){
 
 void timer_setup(void)
 {
-	TCC0.PER = 62500;
-	TCC0.CTRLA = ( TCC0.CTRLA & TC0_CLKSEL_gm ) | TC_CLKSEL_DIV64_gc;
+	TCC0_CTRLA = 0x06;
+	TCC0_CTRLB = 0x00;
+	TCC0_PER = 15624;
+	TCC0_CNT = 0x0000;
 	
-	//OVERFLWOK  방지 인터럽트
-	TCC0.INTCTRLA = ( TCC0.INTCTRLA & ~TC0_OVFINTLVL_gm ) | TC_OVFINTLVL_MED_gc;
+	TCC0_INTCTRLA = 0X03;
+	PMIC_CTRL = 0x07;
 }
 
 void port_init(void)
 {
 	PORTH_DIR = 0xF0;
-	PORTH_OUT = 0x00;
+	PORTH_OUT = 0xF0;
 	TCC0.CNTL = 0xFF;
 }
 
 void timer_LED(){
-	if (TCC0.CNT < 31250)
+	if (TCC0.CNT < 15000)
 	{
-		PORTH_OUT = 0xe0;
+		PORTH_OUT = 0xF0;
 	}
 	else
-	PORTH_OUT = 0xF0;
+	PORTH_OUT = 0x00;
+}
+
+ISR(TCC0_OVF_vect){
+	PORTH_OUTTGL = 0xF0;
 }
 
 int main(void)
 {
 	/* Replace with your application code */
-	OSC_Clock_init();
+	
 	timer_setup();
 	port_init();
 	
-	while (1)
-	{
-		timer_LED();
+	sei();
+	while(1){
+		
 	}
 }
 ```
 ## 결과
-https://user-images.githubusercontent.com/85288381/217155160-3fd74171-f07c-4bb0-9c4c-f77bf576673f.mp4
-
-확실히 빨라진 것을 볼 수 있다.  
