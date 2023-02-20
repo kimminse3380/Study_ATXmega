@@ -23,6 +23,7 @@ Timer를 통한 LED 점등
 - 데이터 출력값 레지스터 DIR
 - 제어 레지스터 CTRLA
 - 인터럽트 제어 레지스터 INTCTRLA
+- 주기 레지스터 PER
 
 ## 코드
 

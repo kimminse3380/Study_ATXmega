@@ -30,6 +30,7 @@ Timer에서 overflow 인터럽트 발생시 키고 끄기
 - 제어 레지스터 CTRLB
 - 인터럽트 제어 레지스터 INTCTRLA
 - PMIC 제어 레지스터 CTRL
+- 주기 레지스터 PER
 
 ## 코드
 
