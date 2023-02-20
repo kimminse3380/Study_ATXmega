@@ -49,7 +49,6 @@ void OSC_Clock_init(void){
 	
 	OSC.PLLCTRL = (uint8_t)OSC_PLLSRC_XOSC_gc | 0x2; //32M
 	OSC.CTRL |= OSC_PLLEN_bm; // enable PLL
-	CLK.PSCTRL = (uint8_t)CLK_PSADIV_1_gc |  CLK_PSBCDIV_1_1_gc; ////프리스케일러
 	
 	while((OSC.STATUS &  OSC_PLLRDY_bm) == 0); //PLL 준비 기다리기
 	CCP = CCP_IOREG_gc;
@@ -59,9 +58,9 @@ void OSC_Clock_init(void){
 
 void timer_setup(void)
 {
-	TCC0_CTRLA = 0x06;
+	TCC0_CTRLA = 0x07; //32000000/1024/(1+31249) = 1Hz
 	TCC0_CTRLB = 0x00;
-	TCC0_PER = 15624;
+	TCC0_PER = 31249;
 	TCC0_CNT = 0x0000;
 	
 	TCC0_INTCTRLA = 0X03;
@@ -83,7 +82,6 @@ ISR(TCC0_OVF_vect){
 int main(void)
 {
 	/* Replace with your application code */
-	
 	timer_setup();
 	port_init();
 	
