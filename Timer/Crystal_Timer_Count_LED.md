@@ -42,7 +42,7 @@ XTAL에 연결되어 있는 크리스탈을 클럭으로 설정하고 Timer를 �
 void OSC_Clock_init(void){
 	OSC.CTRL &=~OSC_RC2MCREF_bm; //disable RC32M
 	// Setting Ext. OSC
-	OSC.XOSCCTRL = OSC_FRQRANGE_2TO9_gc | OSC_X32KLPM_bm | OSC_XOSCSEL_XTAL_16KCLK_gc;
+	OSC.XOSCCTRL = OSC_FRQRANGE_12TO16_gc | OSC_X32KLPM_bm | OSC_XOSCSEL_XTAL_16KCLK_gc;
 	OSC.CTRL |= OSC_XOSCSEL_gm;
 	do
 	{
